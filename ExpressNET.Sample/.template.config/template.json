@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Murat Kirazkaya",
+  "classifications": [ "Web", "Console" ],
+  "identity": "ExpressNET.Sample",
+  "name": "ExpressNET Sample Template",
+  "shortName": "expressnet",
+  "sourceName": "ExpressNET.Sample",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "preferNameDirectory": true
+}
