@@ -44,10 +44,32 @@ public class Response
         streamWriter.Close();
         _client.Close();
     }
+    
+    internal void send(byte[] value, string ContentType = "text/html")
+    {
+        streamWriter.WriteLine($"HTTP/1.1 {StatusCode}");
+        streamWriter.WriteLine($"Date: {Date}");
+        streamWriter.WriteLine($"Server: {Server}");
+        tempHeader.ForEach(x => streamWriter.WriteLine(x));
+        streamWriter.WriteLine("Content-Length: " + value.Length);
+        streamWriter.WriteLine($"Content-Type: {ContentType}\r\n");
+        streamWriter.Flush();
+        
+        networkStream.Write(value, 0, value.Length);        
+
+        streamWriter.Close();
+        networkStream.Close();
+        _client.Close();
+    }
 
     public void sendFile(string filePaths, string ContentType = null)
     {
         send(File.ReadAllText(filePaths), ContentType is null ? getContentTypeFromExtention(filePaths.Split('.').Last()) : ContentType);
+    }
+
+    internal void sendBinary(string filePaths, string ContentType = null)
+    {
+        send(File.ReadAllBytes(filePaths), ContentType is null ? getContentTypeFromExtention(filePaths.Split('.').Last()) : ContentType);
     }
 
     private string getContentTypeFromExtention(string ext)

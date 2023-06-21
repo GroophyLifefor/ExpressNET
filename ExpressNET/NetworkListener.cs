@@ -111,10 +111,12 @@ internal class NetworkListener
 
         string pathInDriver = $"{Directory.GetCurrentDirectory()}{staticDirectory}{request.Url}";
 
-        if (request.Url.EndsWith("favicon.ico") && File.Exists(pathInDriver))
+        if (request.Url.IndexOf("favicon") != -1 && File.Exists(pathInDriver))
         {
             response.setHeader("Cache-Control", "public, max-age=0");
-            response.sendFile(pathInDriver);
+            response.setHeader("Connection", "keep-alive");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.sendBinary(pathInDriver);
             
         } else 
         
