@@ -18,8 +18,4 @@
 		<RepositoryUrl>https://github.com/GroophyLifefor/ExpressNET</RepositoryUrl>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="ObjectDumper.NET" Version="4.1.3" />
-    </ItemGroup>
-
 </Project>

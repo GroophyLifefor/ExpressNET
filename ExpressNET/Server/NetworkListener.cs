@@ -57,11 +57,14 @@ internal class NetworkListener
                     // Accept to connect request
                     TcpClient client = await listener.AcceptTcpClientAsync();
 
+                    // Store endpoint
+                    var endPoint = client.Client.LocalEndPoint;
+                    
                     // handle client request and response
                     await HandleClient(path, client);
 
                     // closes client if not closed.
-                    if (GetState(client) != TcpState.Closed)
+                    if (GetState(endPoint) != TcpState.Closed)
                         client.Close();
                 }
                 
@@ -94,12 +97,12 @@ internal class NetworkListener
         client.Close();
     }
     
-    private TcpState GetState(TcpClient tcpClient)
+    private TcpState GetState(EndPoint? endPoint)
     {
-        var foo = IPGlobalProperties.GetIPGlobalProperties()
-            .GetActiveTcpConnections()
-            .SingleOrDefault(x => x.LocalEndPoint.Equals(tcpClient.Client.LocalEndPoint));
-        return foo != null ? foo.State : TcpState.Unknown;
+        var foo = IPGlobalProperties
+            .GetIPGlobalProperties()
+            .GetActiveTcpConnections().First(x => x.LocalEndPoint.Equals(endPoint));
+        return foo?.State ?? TcpState.Unknown;
     }
     
     private static bool WildCardRegex(string match ,string? value) {

@@ -12,8 +12,4 @@
       <ProjectReference Include="..\ExpressNET\ExpressNET.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="ObjectDumper.NET" Version="4.1.3" />
-    </ItemGroup>
-
 </Project>
