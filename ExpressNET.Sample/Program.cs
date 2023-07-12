@@ -6,7 +6,6 @@ app.use(Express.Static("public"));
 
 app.get("/", (request, response) =>
 {
-    Console.WriteLine(request.RequestRaw);
     response.sendFile("/views/index.html");
 });
 
