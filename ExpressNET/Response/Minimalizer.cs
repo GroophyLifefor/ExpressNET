@@ -5,19 +5,49 @@ namespace ExpressNET;
 
 public class Minimalizer
 {
-    private Dictionary<string, string> Hash2Minimalized { get; set; } = new();
-    public void Minimalize(string contentType, ref string content)
+    private Dictionary<string, string> Hash2Minimalized { get; } = new();
+    public void Minimalize(string? contentType, ref string content)
     {
-        if (contentType != "text/css") return;
+        switch (contentType)
+        {
+            case "text/css":
+            {
+                string key = Hash(content);
+                if (Hash2Minimalized.ContainsKey(key))
+                {
+                    content = Hash2Minimalized[key];
+                    return;
+                }
+                
+                // Minify css
+                string str = new Css.Minify().Minimalize(content);
+                
+                Hash2Minimalized.Add(key, str);
+                content = str;
+            }
+                break;
+            case "text/javascript":
+            {
+                string key = Hash(content);
+                if (Hash2Minimalized.ContainsKey(key))
+                {
+                    content = Hash2Minimalized[key];
+                    return;
+                }
+
+                // Minify javascript
+                string str = new Javascript.Minify().Minimalize(content);
+                
+                Hash2Minimalized.Add(key, str);
+                content = str;
+            }
+                break;
+            default:
+                return;
+        }
         
-        string key = Hash(content);
-        if (Hash2Minimalized.ContainsKey(key))
-            content = Hash2Minimalized[key];
-        string str = CompressCss(content);
-        Hash2Minimalized.Add(key, str);
-        content = str;
+        
     }
-    private string CompressCss(string css) => css.Replace("\r\n", "").Replace("    ", "").Replace(" {", "{").Replace(": ", ":");
     private string Hash(string input)
     {
         using (SHA1Managed shA1Managed = new SHA1Managed())

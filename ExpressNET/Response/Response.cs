@@ -279,8 +279,9 @@ public class Response
         SetLastModified(filePaths);
 
         string content = File.ReadAllText(filePaths);
-        Minimalize(contentType, ref content);
-        send(Encoding.UTF8.GetBytes(content), contentType);
+        Minimalize(ContentType, ref content);
+        
+        send(content, ContentType);
     }
 
     /// <summary>
@@ -323,7 +324,7 @@ public class Response
     /// <param name="contentType">Specific ContentType</param>
     /// <param name="content">Content</param>
     private void Minimalize(string? contentType, ref string content)
-        => _minimalizer.Minimalize(content, ref content);
+        => _minimalizer.Minimalize(contentType, ref content);
     
     /// <summary>
     /// Finds possible paths from an part path.
@@ -345,7 +346,7 @@ public class Response
     /// <returns>returns determined specific type</returns>
     public string type(string ext)
     {
-        ext = ext.Split('.').Last();
+        ext = ext.Split('.').Last().TrimEnd('.');
         return ext switch
         {
             "aac" => "audio/aac",
