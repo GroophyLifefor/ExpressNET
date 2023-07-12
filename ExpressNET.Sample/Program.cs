@@ -1,13 +1,15 @@
 ﻿using ExpressNET;
 
 Express app = new Express();
-app.port = 3000;
 
-app.staticDir("public");
+app.use(Express.Static("public"));
 
-app.route("/", (req, res) =>
+app.get("/", (request, response) =>
 {
-    res.sendFile("views/index.html");
+    Console.WriteLine(request.RequestRaw);
+    response.sendFile("/views/index.html");
 });
 
-app.listen(port => Console.WriteLine($"Server was running at http://localhost:{port}"));
+app.listen(3000, port => Console.WriteLine($"Server running at http://localhost:{port}"));
+
+app.DoNotEndMyConsole();

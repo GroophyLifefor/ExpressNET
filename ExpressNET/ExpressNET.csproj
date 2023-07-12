@@ -5,6 +5,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>ExpressNET</Title>
+        <Authors>Groophy Lifefor</Authors>
+        <Description>An wrapper of express.js</Description>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0.txt</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/GroophyLifefor/ExpressNET</PackageProjectUrl>
+		<PackageId>ExpressNET</PackageId>
+		<Version>1.0.0</Version>
+		<PackageDescription>An wrapper of express.js</PackageDescription>
+		<RepositoryUrl>https://github.com/GroophyLifefor/ExpressNET</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>

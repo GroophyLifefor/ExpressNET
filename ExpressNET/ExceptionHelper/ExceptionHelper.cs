@@ -1,8 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace ExpressNET;
 
-namespace ExpressNET;
-
-internal class ExpectionHelper
+internal abstract class ExceptionHelper
 {
     public static object? ThrowIfNull(object obj, string message) =>
         obj is null ? throw new ArgumentNullException(message) : null;
