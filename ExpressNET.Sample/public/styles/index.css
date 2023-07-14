@@ -1,5 +1,6 @@
 * {
     user-select: none;
+    font-display: swap;
 }
 
 body {
@@ -68,7 +69,8 @@ body {
 }
 
 .box-desc {
-    color: rgb(112, 112, 112);
+    color: rgb(172 172 172);
+    opacity: 1;
 }
 
 .footer {
