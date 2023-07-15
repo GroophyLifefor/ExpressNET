@@ -21,3 +21,7 @@ app.DoNotEndMyConsole();
 ## Installation
 
 > `Install-Package ExpressNET`
+
+## Thanks
+
+Special thanks to [MattIPv4](https://github.com/MattIPv4) and [Matt Welke](https://github.com/mattwelke).
