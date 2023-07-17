@@ -9,7 +9,7 @@ using ExpressNET;
 Express app = new Express();
 
 app.get("/", (req, res) => {
-    resp.send("Hello World");
+    res.send("Hello World");
 });
 
 app.listen(3000);
